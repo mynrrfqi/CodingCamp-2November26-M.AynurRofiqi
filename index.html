@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MiniCoding-Focus Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- ========== AMBIENT BACKGROUND ========== -->
+  <div class="ambient" aria-hidden="true">
+    <div class="ambient__orb ambient__orb--1"></div>
+    <div class="ambient__orb ambient__orb--2"></div>
+    <div class="ambient__orb ambient__orb--3"></div>
+  </div>
+
+  <!-- ========== HEADER ========== -->
+  <header class="header glass-panel">
+    <div class="header__brand">
+      <span class="header__brand-icon" aria-hidden="true">◈</span>
+      <span class="header__brand-name">Mini Coding Project</span>
+    </div>
+    <div class="header__center">
+      <p id="headerDate" class="header__date"></p>
+    </div>
+    <div class="header__actions">
+      <button id="themeToggleBtn" class="btn btn--icon" aria-label="Toggle theme">
+        <svg id="themeIconMoon" class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        <svg id="themeIconSun" class="icon hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- ========== MAIN ========== -->
+  <main class="main">
+
+    <!-- ---- GREETING ---- -->
+    <section class="greeting glass-panel" aria-label="Greeting">
+      <div class="greeting__left">
+        <p class="greeting__eyebrow" id="greetingTime"></p>
+        <h1 class="greeting__headline" id="greetingHeadline"></h1>
+        <p class="greeting__sub" id="greetingSub"></p>
+      </div>
+      <div class="greeting__right">
+        <div class="greeting__clock" id="greetingClock"></div>
+        <div class="greeting__name-wrap">
+          <input
+            type="text"
+            id="nameInput"
+            class="input input--sm"
+            placeholder="Your name…"
+            maxlength="30"
+            aria-label="Your name"
+          />
+          <button id="saveNameBtn" class="btn btn--primary btn--sm">Save</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ---- MAIN GRID ---- -->
+    <div class="dashboard-grid">
+
+      <!-- ===== LEFT PANEL: Timer + Progress + Links ===== -->
+      <div class="panel-left">
+
+        <!-- Focus Timer -->
+        <section class="card glass-panel timer-card" aria-label="Focus Timer">
+          <h2 class="card__title">
+            <svg class="icon icon--title" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            Focus Timer
+          </h2>
+
+          <div class="timer-ring-wrap">
+            <svg class="timer-ring" viewBox="0 0 160 160" aria-hidden="true">
+              <circle class="timer-ring__track" cx="80" cy="80" r="70"/>
+              <circle class="timer-ring__fill"  id="timerRingFill" cx="80" cy="80" r="70"/>
+            </svg>
+            <div class="timer-display">
+              <span id="timerDisplay" class="timer-display__time" aria-live="polite">25:00</span>
+              <span id="timerStatus" class="timer-display__status">READY</span>
+            </div>
+          </div>
+
+          <div class="timer-duration-row">
+            <label for="timerMinInput" class="label-sm">Minutes</label>
+            <input type="number" id="timerMinInput" class="input input--xs" value="25" min="1" max="99" aria-label="Timer minutes"/>
+            <button id="applyTimerBtn" class="btn btn--ghost btn--sm">Set</button>
+          </div>
+
+          <div class="timer-controls">
+            <button id="timerStartBtn" class="btn btn--primary timer-btn">
+              <svg class="icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+              Start
+            </button>
+            <button id="timerStopBtn"  class="btn btn--secondary timer-btn" disabled>
+              <svg class="icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>
+              Pause
+            </button>
+            <button id="timerResetBtn" class="btn btn--ghost timer-btn">
+              <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-4.5"/></svg>
+              Reset
+            </button>
+          </div>
+        </section>
+
+        <!-- Daily Progress -->
+        <section class="card glass-panel progress-card" aria-label="Daily Progress">
+          <h2 class="card__title">
+            <svg class="icon icon--title" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+            Daily Progress
+          </h2>
+          <div class="progress-ring-wrap">
+            <svg class="progress-ring" viewBox="0 0 120 120" aria-hidden="true">
+              <circle class="progress-ring__track" cx="60" cy="60" r="50"/>
+              <circle class="progress-ring__fill" id="progressRingFill" cx="60" cy="60" r="50"/>
+            </svg>
+            <div class="progress-ring__center" aria-live="polite">
+              <span id="progressPct" class="progress-pct">0%</span>
+              <span class="progress-pct__label">complete</span>
+            </div>
+          </div>
+          <div class="progress-stats">
+            <div class="stat">
+              <span id="statDone"  class="stat__val">0</span>
+              <span class="stat__label">Done</span>
+            </div>
+            <div class="stat-divider"></div>
+            <div class="stat">
+              <span id="statTotal" class="stat__val">0</span>
+              <span class="stat__label">Total</span>
+            </div>
+            <div class="stat-divider"></div>
+            <div class="stat">
+              <span id="statLeft"  class="stat__val">0</span>
+              <span class="stat__label">Left</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- Quick Links -->
+        <section class="card glass-panel links-card" aria-label="Quick Links">
+          <h2 class="card__title">
+            <svg class="icon icon--title" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+            Quick Links
+          </h2>
+          <div class="link-input-group">
+            <input type="text" id="linkNameInput" class="input" placeholder="Label (e.g. GitHub)" maxlength="30" aria-label="Link label"/>
+            <input type="url"  id="linkUrlInput"  class="input" placeholder="https://…" aria-label="Link URL"/>
+            <button id="addLinkBtn" class="btn btn--primary">Add Link</button>
+          </div>
+          <div id="linksList" class="links-list" aria-label="Saved links" aria-live="polite"></div>
+        </section>
+
+      </div><!-- /panel-left -->
+
+      <!-- ===== RIGHT PANEL: TASKS ===== -->
+      <div class="panel-right">
+
+        <!-- Task Dashboard -->
+        <section class="card glass-panel" aria-label="Add Task">
+          <h2 class="card__title">
+            <svg class="icon icon--title" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+            Task Dashboard
+          </h2>
+
+          <div class="task-input-row">
+            <input
+              type="text"
+              id="taskInput"
+              class="input"
+              placeholder="Add a new task…"
+              maxlength="120"
+              aria-label="New task"
+            />
+            <button id="addTaskBtn" class="btn btn--primary">
+              <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+              Add
+            </button>
+          </div>
+
+          <!-- Filter + Sort -->
+          <div class="task-controls">
+            <div class="filter-tabs" role="tablist" aria-label="Filter tasks">
+              <button class="filter-tab active" data-filter="all"    role="tab" aria-selected="true">All</button>
+              <button class="filter-tab"        data-filter="active" role="tab" aria-selected="false">Active</button>
+              <button class="filter-tab"        data-filter="done"   role="tab" aria-selected="false">Done</button>
+            </div>
+            <div class="sort-wrap">
+              <label for="sortSelect" class="sr-only">Sort tasks</label>
+              <select id="sortSelect" class="select" aria-label="Sort tasks">
+                <option value="default">Order added</option>
+                <option value="asc">A → Z</option>
+                <option value="desc">Z → A</option>
+                <option value="done">Done last</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Task List -->
+          <ul id="taskList" class="task-list" aria-label="Task list" aria-live="polite"></ul>
+
+          <!-- Bulk actions -->
+          <div class="task-footer">
+            <span id="taskCountLabel" class="task-footer__count"></span>
+            <button id="clearDoneBtn" class="btn btn--ghost btn--xs">Clear completed</button>
+          </div>
+        </section>
+
+      </div><!-- /panel-right -->
+
+    </div><!-- /dashboard-grid -->
+  </main><!-- /main -->
+
+  <!-- Screen-reader timer alert -->
+  <div id="timerAlert" aria-live="assertive" class="sr-only"></div>
+
+  <!-- ========== TIMER DONE MODAL ========== -->
+  <div id="timerDoneModal" class="modal-backdrop hidden" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal-box glass-panel">
+      <div class="modal-icon" aria-hidden="true">✔</div>
+      <h2 class="modal-title" id="modalTitle">Focus Session Complete!</h2>
+      <p class="modal-body">Great work! Your focus session has ended.<br>Take a well-deserved break.</p>
+      <div class="modal-timer-badge" id="modalSessionTime"></div>
+      <button id="modalDismissBtn" class="btn btn--primary modal-dismiss-btn">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+        Dismiss &amp; Stop Sound
+      </button>
+    </div>
+  </div>
+
+  <script src="js/script.js"></script>
+</body>
+</html>
