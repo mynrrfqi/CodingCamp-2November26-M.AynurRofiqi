@@ -504,10 +504,13 @@ const timerDoneModal   = document.getElementById('timerDoneModal');
 const modalDismissBtn  = document.getElementById('modalDismissBtn');
 const modalSessionTime = document.getElementById('modalSessionTime');
 
-const TIMER_CIRC = 2 * Math.PI * 70; // 439.82 px  (r = 70)
+const TIMER_CIRC         = 2 * Math.PI * 70; // 439.82 px  (r = 70)
+const DEFAULT_DURATION   = 25;               // always reset to 25 min on page load
 
-let timerDuration = Store.get('timerDuration', 25); // minutes
-let timerTotal    = timerDuration * 60;              // seconds
+// timerDuration: user can change per-session via "Set" button,
+// but on every page refresh it goes back to 25 (DEFAULT_DURATION).
+let timerDuration = DEFAULT_DURATION;
+let timerTotal    = DEFAULT_DURATION * 60;   // seconds
 let timeLeft      = timerTotal;
 let timerInterval = null;
 let timerRunning  = false;
@@ -670,11 +673,10 @@ applyTimerBtn.addEventListener('click', () => {
     stopAlarm();
   }
 
-  // Apply new duration
+  // Apply new duration (session-only, not persisted)
   timerDuration = mins;
   timerTotal    = mins * 60;
   timeLeft      = timerTotal;
-  Store.set('timerDuration', mins);
 
   timerStatusEl.textContent = 'READY';
   renderTimer();
@@ -682,9 +684,9 @@ applyTimerBtn.addEventListener('click', () => {
 });
 
 function initTimer() {
-  timerMinInput.value = timerDuration;
-  timerTotal          = timerDuration * 60;
-  timeLeft            = timerTotal;
+  timerMinInput.value                    = DEFAULT_DURATION;
+  timerTotal                             = DEFAULT_DURATION * 60;
+  timeLeft                               = timerTotal;
   timerRingFillEl.style.strokeDasharray  = TIMER_CIRC;
   timerRingFillEl.style.strokeDashoffset = 0;
   renderTimer();
